@@ -12,6 +12,12 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        applicationVariants.all { variant ->
+            buildConfigField "String", "consumer_key", getMyApiKey("consumer_key")
+            buildConfigField "String", "consumer_secret", getMyApiKey("consumer_secret")
+            buildConfigField "String", "token", getMyApiKey("token")
+            buildConfigField "String", "token_secret", getMyApiKey("token_secret")
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -29,4 +35,11 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.1'
     compile 'com.android.support:design:25.2.0'
     testCompile 'junit:junit:4.12'
+}
+
+//return a MY API KEY from a properties file.
+def getMyApiKey(String property){
+    Properties properties = new Properties()
+    properties.load(new FileInputStream("secrets.properties"))
+    return "\"" + properties.getProperty(property) +"\""
 }
