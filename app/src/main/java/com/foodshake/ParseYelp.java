@@ -11,7 +11,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+import android.location.LocationManager;
+import android.location.Location;
+import android.content.Context;
 import retrofit2.Call;
 
 /**
@@ -19,11 +21,11 @@ import retrofit2.Call;
  */
 
 public class ParseYelp {
-    private Map params;
+    private Map<String, String> params = new HashMap<>();
     YelpFusionApi yelp = YelpObject.getInstance();
 
-    public void getRest(JSONObject pref) throws JSONException {
-        this.params = setPref(pref);
+    public void getRest(JSONObject pref) throws JSONException, SecurityException{
+        params = setPref(pref);
 
     }
 
@@ -31,7 +33,7 @@ public class ParseYelp {
     //params.put("term", "food");
     //params.put("limit", "3");
     //return:
-    private Map<String, String> setPref(JSONObject inPref) throws JSONException {
+    private Map<String, String> setPref(JSONObject inPref) throws JSONException, SecurityException{
         // set order pref; 0 = best matched;
         params.put("sort", "0");
 
@@ -49,6 +51,22 @@ public class ParseYelp {
         String prefRadius = inPref.getString("radius");
         params.put("radius_filter", prefRadius);
         return params;
+
+
+        // set location
+        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        double lat, lon;
+        if(location == null){
+             lon = -123.120738;  // if no location then set the default location to Vancouver
+             lat = 49.282729;
+        }
+        else {
+             lon = location.getLongitude();
+             lat = location.getLatitude();
+        }
+        params.put("latitude", Double.toString(lat));
+        params.put("longitude", Double.toString(lon));
     }
 
 
