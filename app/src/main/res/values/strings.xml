@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Shaker</string>
+    <string name="app_name">Food Shaker</string>
     <string name="action_settings">Preferences</string>
     <string name="title_activity_fetch_results">Results</string>
     <string name="trouble_finding_a_restaurant_shake_me">Trouble finding a restaurant? \n Shake me!</string>
