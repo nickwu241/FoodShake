@@ -12,6 +12,7 @@
     tools:context="com.foodshake.YourChoice"
     tools:showIn="@layout/activity_fetch_results"
     android:weightSum="1"
+    android:label = ""
     android:baselineAligned="false">
 
     <TextView
@@ -35,7 +36,7 @@
         android:layout_gravity="center_vertical|center_horizontal"
 
         android:minHeight="25dip"
-        android:numStars="5"
+        android:numStars="0"
         android:textAlignment="center" />
 
     <Button
@@ -51,5 +52,13 @@
         android:layout_weight="0.03"
         android:onClick="onCallClick"
         android:text="Call" />
+
+    <TextView
+        android:id="@+id/category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.03"
+        android:text="TextView"
+        android:textAlignment="center" />
 
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.foodshake;
 
 import com.yelp.fusion.client.models.Business;
+import com.yelp.fusion.client.models.Category;
 import com.yelp.fusion.client.models.Coordinates;
 import com.yelp.fusion.client.models.Hour;
 import com.yelp.fusion.client.models.Location;
@@ -27,6 +28,7 @@ public class Restaurant {
     public ArrayList<Hour> hours; // the hours associated with the restaurant.  It is in a JSON Array.
     public Coordinates coordinates; // gets the Lat/Lon for the restaurant
     public Location location; // the location of the restaurant.  includes everything relevant to the location
+    public ArrayList<Category> categories;
 
     public Restaurant(Business businessObject) {
         parseData(businessObject);
@@ -45,6 +47,7 @@ public class Restaurant {
         this.hours = businessObject.getHours();
         this.coordinates = businessObject.getCoordinates();
         this.location = businessObject.getLocation();
+        this.categories = businessObject.getCategories();
     }
 
 

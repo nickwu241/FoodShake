@@ -28,9 +28,7 @@ public class YelpParserTests {
         Map<String, String> testParam = new HashMap<>();
         testParam.put("type", "indian");
         testParam.put("radius", "15000");
-//        Location testLoc = new Location("");
-//        testLoc.setLatitude(49.2606d);
-//        testLoc.setLongitude(-123.2460d);
+
         ArrayList<Restaurant> restaurants = p.businessSearch(testParam, null);
         ArrayList<Restaurant> empty = new ArrayList<Restaurant>();
 
