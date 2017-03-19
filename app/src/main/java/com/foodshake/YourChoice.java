@@ -33,12 +33,9 @@ public class YourChoice extends AppCompatActivity {
     }
 
     public void onDirectionsClick(View view) {
+        String result = RestaurantDB.selectedRestaurant.id;
         startActivity(new Intent(Intent.ACTION_VIEW, Uri
-                .parse("http://maps.google.com/maps?saddr="
-                        + RestaurantDB.currentLocation.getLatitude() + ","
-                        + RestaurantDB.currentLocation.getLongitude() + "&daddr="
-                        + RestaurantDB.selectedRestaurant.coordinates.getLatitude() + ","
-                        + RestaurantDB.selectedRestaurant.coordinates.getLongitude())));
+                .parse("http://maps.google.com/?q=" + result)));
     }
 
     public void onCallClick(View view) {
