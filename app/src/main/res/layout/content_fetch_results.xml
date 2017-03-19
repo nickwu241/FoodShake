@@ -38,18 +38,18 @@
         android:numStars="5"
         android:textAlignment="center" />
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.03" />
-
     <Button
-        android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.03"
         android:onClick="onDirectionsClick"
-        android:text="Button" />
+        android:text="Directions" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.03"
+        android:onClick="onCallClick"
+        android:text="Call" />
 
 </LinearLayout>

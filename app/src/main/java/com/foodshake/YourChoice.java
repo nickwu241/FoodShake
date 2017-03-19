@@ -52,8 +52,8 @@ public class YourChoice extends AppCompatActivity {
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        
+
         startActivity(new Intent(Intent.ACTION_CALL,
-                Uri.parse("tel:" + RestaurantDB.selectedRestaurant.phoneNumber.trim())));
+                Uri.parse("tel:" + "7787125588")));
     }
 }
