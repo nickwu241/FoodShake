@@ -3,6 +3,7 @@ package com.foodshake;
 import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,11 +17,7 @@ import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
-import android.hardware.SensorListener;
 import android.os.Handler;
-import android.os.Bundle;
-import android.widget.Toast;
 
 import java.util.HashMap;
 
@@ -96,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
             if (mAccel > 12) {
                 shakeAction();
             }
-
         }
 
         @Override
@@ -116,16 +112,16 @@ public class MainActivity extends AppCompatActivity {
                 toast.cancel();
 
             }
-        },250);
+        }, 250);
 
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-        ParseYelp yelpeParser = new ParseYelp();
+        YelpParser yelpeParser = new YelpParser();
         HashMap pref = new HashMap<>();
         pref.put("type", "all");
         pref.put("radius", "25000");
-        // yelpeParser.getRest(pref, location);
+        // yelpeParser.businessSearch(pref, location);
     }
 
     @Override
@@ -138,6 +134,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         mSensorManager.unregisterListener(mSensorListener);
         super.onPause();
+    }
+
+    private class YelpCallTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... v) {
+            return null;
+        }
     }
 
 }
