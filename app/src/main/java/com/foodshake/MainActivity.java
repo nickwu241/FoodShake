@@ -7,6 +7,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -16,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.content.Context;
 import android.hardware.Sensor;
@@ -23,18 +25,34 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.os.Handler;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final int MESSAGE_SEARCH_BUSSINESS_SUCCESS = 1;
 
     private SensorManager mSensorManager;
     private float mAccel; // acceleration apart from gravity
     private float mAccelCurrent; // current acceleration including gravity
     private float mAccelLast; // last acceleration including gravity
-    private Toast toast;
+    private Toast mToast;
+
+    private SearchBusinessTask mSearchBusinessTask;
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MESSAGE_SEARCH_BUSSINESS_SUCCESS:
+                    int randomIndex = ThreadLocalRandom.current().nextInt(0, RestaurantDB.restaurants.size());
+                    Restaurant r = RestaurantDB.restaurants.get(randomIndex);
+                    ((TextView) findViewById(R.id.hello_world)).setText(r.name);
+                    Log.i("RESTAURANT", r.name);
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +78,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        HashMap pref = new HashMap<>();
+//        pref.put("type", "all");
+//        pref.put("radius", "25000");
+//        new SearchBusinessTask(pref, null, mHandler).execute();
     }
 
     @Override
@@ -108,14 +130,14 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private void shakeAction() throws SecurityException {
-        toast = Toast.makeText(getApplicationContext(), "Device has shaken.", Toast.LENGTH_SHORT);
-        toast.show();
+        mToast = Toast.makeText(getApplicationContext(), "Device has shaken.", Toast.LENGTH_SHORT);
+        mToast.show();
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                toast.cancel();
+                mToast.cancel();
 
             }
         }, 250);
@@ -131,10 +153,13 @@ public class MainActivity extends AppCompatActivity {
             Log.e("EXCEPTION", e.getMessage());
         }
 
-        // HashMap pref = new HashMap<>();
-        // pref.put("type", "all");
-        // pref.put("radius", "25000");
-        // new SearchBusinessTask(pref, location).execute();
+        if (mSearchBusinessTask == null || mSearchBusinessTask.getStatus() != AsyncTask.Status.RUNNING) {
+            HashMap pref = new HashMap<>();
+            pref.put("type", "all");
+            pref.put("radius", "25000");
+            mSearchBusinessTask = new SearchBusinessTask(pref, location, mHandler);
+            mSearchBusinessTask.execute();
+        }
     }
 
     @Override
