@@ -44,4 +44,12 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.03" />
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.03"
+        android:onClick="onDirectionsClick"
+        android:text="Button" />
+
 </LinearLayout>

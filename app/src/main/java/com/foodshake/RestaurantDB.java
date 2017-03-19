@@ -13,6 +13,4 @@ public class RestaurantDB {
     public static ArrayList<Restaurant> restaurants;
     public static Restaurant selectedRestaurant;
     public static Location currentLocation;
-    public static Intent navigation;
-
 }
