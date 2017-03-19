@@ -1,5 +1,7 @@
 package com.foodshake;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -27,4 +29,12 @@ public class YourChoice extends AppCompatActivity {
 
     }
 
+    public void onDirectionsClick() {
+        RestaurantDB.navigation = new Intent(Intent.ACTION_VIEW, Uri
+                .parse("http://maps.google.com/maps?saddr="
+                        + RestaurantDB.currentLocation.getLatitude() + ","
+                        + RestaurantDB.currentLocation.getLongitude() + "&daddr="
+                        + RestaurantDB.selectedRestaurant.coordinates.getLatitude() + ","
+                        + RestaurantDB.selectedRestaurant.coordinates.getLongitude()));
+    }
 }

@@ -126,31 +126,19 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private void shakeAction() throws SecurityException {
-//        mToast = Toast.makeText(getApplicationContext(), "  ", Toast.LENGTH_SHORT);
-//        mToast.show();
-//
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                mToast.cancel();
-//
-//            }
-//        }, 250);
-
-        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-
-        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Location location = null;
-        try {
-            location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            RestaurantDB.currentLocation = location;
-        }
-        catch (SecurityException e) {
-            Log.e("EXCEPTION", e.getMessage());
-        }
-
         if (mSearchBusinessTask == null || mSearchBusinessTask.getStatus() != AsyncTask.Status.RUNNING) {
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+
+            LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            Location location = null;
+            try {
+                location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                RestaurantDB.currentLocation = location;
+            }
+            catch (SecurityException e) {
+                Log.e("EXCEPTION", e.getMessage());
+            }
+
             HashMap pref = new HashMap<>();
             pref.put("type", "all");
             pref.put("radius", "25000");
