@@ -87,5 +87,45 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/author"
+        android:layout_width="match_parent"
+        android:layout_height="41dp"
+        android:text="TextView" />
+
+    <RatingBar
+        android:id="@+id/ratingBar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.03"
+        android:numStars="5" />
+
+    <TextView
+        android:id="@+id/body1"
+        android:layout_width="match_parent"
+        android:layout_height="86dp"
+        android:text="TextView" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </TableLayout>
+
 </LinearLayout>
 

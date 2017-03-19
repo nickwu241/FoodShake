@@ -5,10 +5,17 @@ import com.yelp.fusion.client.models.Category;
 import com.yelp.fusion.client.models.Coordinates;
 import com.yelp.fusion.client.models.Hour;
 import com.yelp.fusion.client.models.Location;
+import com.yelp.fusion.client.models.Review;
+import com.yelp.fusion.client.models.Reviews;
 
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import retrofit2.Call;
+
+import static com.foodshake.YelpObject.getYelpAPI;
 
 /**
  * Created by chaneric on 2017-03-18.
@@ -29,6 +36,7 @@ public class Restaurant {
     public Coordinates coordinates; // gets the Lat/Lon for the restaurant
     public Location location; // the location of the restaurant.  includes everything relevant to the location
     public ArrayList<Category> categories;
+    public Business businessObj;
 
     public Restaurant(Business businessObject) {
         parseData(businessObject);
@@ -48,7 +56,11 @@ public class Restaurant {
         this.coordinates = businessObject.getCoordinates();
         this.location = businessObject.getLocation();
         this.categories = businessObject.getCategories();
+        this.businessObj = businessObject;
     }
+
+
+
 
 
 

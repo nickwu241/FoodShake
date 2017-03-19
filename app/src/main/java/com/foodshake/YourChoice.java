@@ -15,10 +15,14 @@ import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.yelp.fusion.client.models.Review;
+import com.yelp.fusion.client.models.Reviews;
+
+import java.util.ArrayList;
+
 public class YourChoice extends AppCompatActivity {
     public static TextView textViewObj;
     public static TextView categoryObj;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +38,6 @@ public class YourChoice extends AppCompatActivity {
 
         categoryObj = (TextView) findViewById(R.id.category);
         categoryObj.setText(RestaurantDB.selectedRestaurant.categories.get(0).getTitle());
-
-
 
         RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         ratingBar.setRating((float) RestaurantDB.selectedRestaurant.rating);
@@ -53,4 +55,19 @@ public class YourChoice extends AppCompatActivity {
         startActivity(new Intent(Intent.ACTION_DIAL).setData(
                 Uri.parse("tel:" + RestaurantDB.selectedRestaurant.phoneNumber.trim())));
     }
+
+    public void setReviews() {
+        TextView personReview = (TextView) findViewById(R.id.author);
+        TextView body = (TextView) findViewById(R.id.body1);
+        RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar2);
+        Review current = RestaurantDB.reviewsForSelected.get(0);
+
+        personReview.setText(current.getUser().getName());
+        body.setText(current.getText());
+        ratingBar.setRating((float) current.getRating());
+        
+    }
+
+
+
 }
