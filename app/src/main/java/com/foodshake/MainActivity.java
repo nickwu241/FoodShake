@@ -1,6 +1,8 @@
 package com.foodshake;
 
 import android.hardware.SensorManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,6 +21,8 @@ import android.hardware.SensorListener;
 import android.os.Handler;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import java.util.HashMap;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -76,9 +80,9 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
     private final SensorEventListener mSensorListener = new SensorEventListener() {
-
-
+        @Override
         public void onSensorChanged(SensorEvent se) {
             float x = se.values[0];
             float y = se.values[1];
@@ -88,25 +92,41 @@ public class MainActivity extends AppCompatActivity {
             float delta = mAccelCurrent - mAccelLast;
             mAccel = mAccel * 0.9f + delta; // perform low-cut filter
 
+            // shake detected
             if (mAccel > 12) {
-                toast = Toast.makeText(getApplicationContext(), "Device has shaken.", Toast.LENGTH_SHORT);
-                toast.show();
-
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        toast.cancel();
-
-                    }
-                },250);
+                shakeAction();
             }
 
         }
 
+        @Override
         public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
         }
     };
+
+    private void shakeAction() throws SecurityException {
+        toast = Toast.makeText(getApplicationContext(), "Device has shaken.", Toast.LENGTH_SHORT);
+        toast.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                toast.cancel();
+
+            }
+        },250);
+
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+        ParseYelp yelpeParser = new ParseYelp();
+        HashMap pref = new HashMap<>();
+        pref.put("type", "all");
+        pref.put("radius", "25000");
+        // yelpeParser.getRest(pref, location);
+    }
 
     @Override
     protected void onResume() {
