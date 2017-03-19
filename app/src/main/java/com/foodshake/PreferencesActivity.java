@@ -41,9 +41,30 @@ public class PreferencesActivity extends AppCompatActivity {
                 }
                 break;
             default:
-                // any other catagory types, uncheck all
+                // any other catagory types, uncheck 'all'
                 ((CheckBox) findViewById(R.id.all)).setChecked(false);
                 break;
         }
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        try {
+            RestaurantDB.radius = Integer.parseInt(RestaurantDB.prefRadius.getText().toString());
+        }
+        catch (NumberFormatException e) {
+            // default 25000
+            RestaurantDB.radius = 25000;
+        }
+
+        RadioButton selectedPrice = ((RadioButton) findViewById(RestaurantDB.prefPriceGroup.getCheckedRadioButtonId()));
+        if (selectedPrice != null) {
+            RestaurantDB.price = selectedPrice.getText().length();
+        }
+        else {
+            RestaurantDB.price = 4;
+        }
+    }
+
 }
