@@ -22,6 +22,7 @@ public class YourChoice extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        this.setTitle(" ");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fetch_results);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
