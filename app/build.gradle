@@ -38,14 +38,14 @@ dependencies {
     })
     compile 'io.github.ranga543:yelp-fusion-client:0.1.2'
     compile 'com.android.support:appcompat-v7:25.2.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.1'
     compile 'com.android.support:design:25.2.0'
     testCompile 'junit:junit:4.12'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }
 
 //return a MY API KEY from a properties file.
-def getMyApiKey(String property){
+def getMyApiKey(String property) {
     Properties properties = new Properties()
     properties.load(new FileInputStream("secrets.properties"))
-    return "\"" + properties.getProperty(property) +"\""
+    return "\"" + properties.getProperty(property) + "\""
 }

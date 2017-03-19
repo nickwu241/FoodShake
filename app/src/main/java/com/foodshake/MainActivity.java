@@ -1,6 +1,7 @@
 package com.foodshake;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.SensorManager;
 import android.location.Location;
@@ -47,8 +48,12 @@ public class MainActivity extends AppCompatActivity {
                 case MESSAGE_SEARCH_BUSSINESS_SUCCESS:
                     int randomIndex = ThreadLocalRandom.current().nextInt(0, RestaurantDB.restaurants.size());
                     Restaurant r = RestaurantDB.restaurants.get(randomIndex);
-                    ((TextView) findViewById(R.id.hello_world)).setText(r.name);
+                    RestaurantDB.selectedRestaurant = r;
                     Log.i("RESTAURANT", r.name);
+
+
+                    Intent i = new Intent(getApplicationContext(), FetchResultsActivity.class);
+                    startActivity(i);
                     break;
             }
         }
@@ -69,14 +74,9 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
+
+
 
 //        HashMap pref = new HashMap<>();
 //        pref.put("type", "all");
