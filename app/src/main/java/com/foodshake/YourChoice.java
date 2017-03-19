@@ -57,14 +57,37 @@ public class YourChoice extends AppCompatActivity {
     }
 
     public void setReviews() {
+
+        // first review
         TextView personReview = (TextView) findViewById(R.id.author);
         TextView body = (TextView) findViewById(R.id.body1);
         RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar2);
         Review current = RestaurantDB.reviewsForSelected.get(0);
-
         personReview.setText(current.getUser().getName());
         body.setText(current.getText());
         ratingBar.setRating((float) current.getRating());
+
+        // second review
+        TextView personReview2 = (TextView) findViewById(R.id.author2);
+        TextView body2 = (TextView) findViewById(R.id.body2);
+        RatingBar ratingBar2 = (RatingBar) findViewById(R.id.ratingBar3);
+        Review current2 = RestaurantDB.reviewsForSelected.get(1);
+        personReview2.setText(current2.getUser().getName());
+        body2.setText(current2.getText());
+        ratingBar2.setRating((float) current2.getRating());
+
+        // third review
+        TextView personReview3 = (TextView) findViewById(R.id.author3);
+        TextView body3 = (TextView) findViewById(R.id.body3);
+        RatingBar ratingBar3 = (RatingBar) findViewById(R.id.ratingBar4);
+        Review current3 = RestaurantDB.reviewsForSelected.get(2);
+        personReview3.setText(current3.getUser().getName());
+        body3.setText(current3.getText());
+        ratingBar3.setRating((float) current3.getRating());
+
+
+
+
         
     }
 
