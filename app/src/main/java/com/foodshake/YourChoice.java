@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -41,19 +42,7 @@ public class YourChoice extends AppCompatActivity {
     }
 
     public void onCallClick(View view) {
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-
-        startActivity(new Intent(Intent.ACTION_CALL,
-                Uri.parse("tel:" + "7787125588")));
+        startActivity(new Intent(Intent.ACTION_DIAL).setData(
+                Uri.parse("tel:" + RestaurantDB.selectedRestaurant.phoneNumber.trim())));
     }
 }
