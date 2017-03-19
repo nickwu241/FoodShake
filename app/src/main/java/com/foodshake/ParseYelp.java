@@ -1,10 +1,8 @@
 package com.foodshake;
 
-import android.widget.Toast;
-
-import com.yelp.clientlib.connection.YelpAPI;
-import com.yelp.clientlib.entities.Business;
-import com.yelp.clientlib.entities.SearchResponse;
+import com.yelp.fusion.client.connection.YelpFusionApi;
+import com.yelp.fusion.client.models.Business;
+import com.yelp.fusion.client.models.SearchResponse;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +20,7 @@ import retrofit2.Call;
 
 public class ParseYelp {
     private Map params;
-    YelpAPI yelp = YelpObject.getInstance();
+    YelpFusionApi yelp = YelpObject.getInstance();
 
     public void getRest(JSONObject pref) throws JSONException {
         this.params = setPref(pref);
@@ -55,9 +53,9 @@ public class ParseYelp {
 
 
     private ArrayList<Business> getResult(Map params) throws IOException {
-        Call<SearchResponse> call = yelp.search("",params);
+        Call<SearchResponse> call = yelp.getBusinessSearch(params);
         SearchResponse searchResponse = call.execute().body();
-        ArrayList<Business> businesses = searchResponse.businesses();
+        ArrayList<Business> businesses = searchResponse.getBusinesses();
 
         return businesses;
     }
