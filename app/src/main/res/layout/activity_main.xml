@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/teal"
     tools:context="com.foodshake.MainActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -18,7 +18,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@drawable/gradient"
+        android:background="@color/teal"
         android:titleTextColor="@color/colorPrimary"
 
         app:popupTheme="@style/AppTheme.PopupOverlay" />
