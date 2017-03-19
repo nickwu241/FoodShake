@@ -15,9 +15,6 @@ import java.util.ArrayList;
 
 public class Restaurant {
 
-    private Restaurant(Business businessObject) {
-        parseData(businessObject);
-    }
     private String id;   // the unique ID of the restaurant
     private String name; // the name of the restaurant
     private String imageURL; // the URL for the image associated with the restaurant
@@ -31,6 +28,9 @@ public class Restaurant {
     private Coordinates coordinates; // gets the Lat/Lon for the restaurant
     private Location location; // the location of the restaurant.  includes everything relevant to the location
 
+    public Restaurant(Business businessObject) {
+        parseData(businessObject);
+    }
 
     private void parseData(Business businessObject) {
         final String id = businessObject.getId();

@@ -17,11 +17,15 @@ public class YelpParser {
     private Map<String, String> params = new HashMap<>();
     private YelpFusionApi yelpAPI = YelpObject.getYelpAPI();
 
-    public ArrayList<Business> businessSearch(Map<String, String> userPreferences, Location loc) throws IOException {
+    public ArrayList<Restaurant> businessSearch(Map<String, String> userPreferences, Location loc) throws IOException {
         setUpParams(userPreferences, loc);
         Call<SearchResponse> call = yelpAPI.getBusinessSearch(params);
         SearchResponse searchResponse = call.execute().body();
-        return searchResponse.getBusinesses();
+        ArrayList<Restaurant> restaurants = new ArrayList<>();
+        for (Business b : searchResponse.getBusinesses()) {
+            restaurants.add(new Restaurant(b));
+        }
+        return restaurants;
     }
 
     private void setUpParams(Map<String, String> userPreferences, Location location) {
