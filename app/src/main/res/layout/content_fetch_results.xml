@@ -88,8 +88,9 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:orientation="horizontal"
         android:weightSum="1">
 
@@ -97,13 +98,16 @@
             android:id="@+id/author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="10dp"
             android:text="TextView" />
 
         <RatingBar
             android:id="@+id/ratingBar2"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="150dp"
 
             android:isIndicator="true"
             android:minHeight="25dip"
@@ -116,13 +120,16 @@
         android:layout_width="match_parent"
         android:layout_height="42dp"
         android:orientation="horizontal"
-        android:layout_weight="0.09"
+        android:layout_weight="0.23"
         android:layout_gravity="center_vertical|center_horizontal">
+
         <TextView
             android:id="@+id/body1"
             android:layout_width="match_parent"
             android:layout_height="86dp"
             android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:text="TextView" />
     </LinearLayout>
 
