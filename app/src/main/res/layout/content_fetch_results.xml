@@ -247,19 +247,6 @@
             android:text="TextView" />
     </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="300dp"
-        android:layout_weight="0.03"
-        app:backgroundTint="@color/colorPrimary"
-        android:clickable="true"
-        app:fabSize="mini"
-        app:srcCompat="@drawable/ic_vibration_black_48dp" />
-
 </LinearLayout>
 
 

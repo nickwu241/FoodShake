@@ -22,6 +22,22 @@
 
     </android.support.design.widget.AppBarLayout>
 
+
     <include layout="@layout/content_fetch_results" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton6"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="510dp"
+        android:layout_weight="0.03"
+        android:background="@color/colorPrimary"
+        android:clickable="true"
+        android:onClick="onShakeClick"
+        android:scaleType="fitXY"
+        app:backgroundTint="@color/colorPrimary"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_vibration_black_48dp" />
 
 </android.support.design.widget.CoordinatorLayout>

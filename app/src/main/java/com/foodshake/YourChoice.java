@@ -70,6 +70,10 @@ public class YourChoice extends AppCompatActivity {
         }
     }
 
+    public void onShakeClick(View view) {
+        finish();
+    }
+
     public void setReviews() {
 
         // first review

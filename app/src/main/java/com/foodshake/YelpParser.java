@@ -16,7 +16,7 @@ import java.util.Map;
 import retrofit2.Call;
 
 public class YelpParser {
-    private static final String LIMIT = "200";
+    private static final String LIMIT = "50";
     private Map<String, String> params = new HashMap<>();
     private YelpFusionApi yelpAPI = YelpObject.getYelpAPI();
 
@@ -46,7 +46,7 @@ public class YelpParser {
         params.put("sort", "0");
 
         // limit to 20 results
-        params.put("limit", "50");
+        params.put("limit", LIMIT);
 
         // set terms : "food" "bars", NOT "food,bars"
         params.put("term", "food");
