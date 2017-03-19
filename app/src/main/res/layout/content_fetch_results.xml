@@ -35,7 +35,7 @@
         android:layout_gravity="center_vertical|center_horizontal"
 
         android:minHeight="25dip"
-        android:numStars="5"
+        android:numStars="0"
         android:textAlignment="center" />
 
     <Button

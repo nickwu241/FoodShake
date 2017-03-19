@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 public class YourChoice extends AppCompatActivity {
@@ -28,6 +29,9 @@ public class YourChoice extends AppCompatActivity {
 
         textViewObj = (TextView) findViewById(R.id.restaurant_name);
         textViewObj.setText(RestaurantDB.selectedRestaurant.name);
+
+        RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        ratingBar.setRating((float) RestaurantDB.selectedRestaurant.rating);
 
 
     }
