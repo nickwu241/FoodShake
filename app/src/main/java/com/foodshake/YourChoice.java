@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 public class YourChoice extends AppCompatActivity {
     public static TextView textViewObj;
+    public static TextView categoryObj;
 
 
     @Override
@@ -29,6 +30,11 @@ public class YourChoice extends AppCompatActivity {
 
         textViewObj = (TextView) findViewById(R.id.restaurant_name);
         textViewObj.setText(RestaurantDB.selectedRestaurant.name);
+
+        categoryObj = (TextView) findViewById(R.id.category);
+        categoryObj.setText(RestaurantDB.selectedRestaurant.categories.get(0).getTitle());
+
+
 
         RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         ratingBar.setRating((float) RestaurantDB.selectedRestaurant.rating);
