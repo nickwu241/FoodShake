@@ -144,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
         Location location = null;
         try {
             location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            RestaurantDB.currentLocation = location;
         }
         catch (SecurityException e) {
             Log.e("EXCEPTION", e.getMessage());
