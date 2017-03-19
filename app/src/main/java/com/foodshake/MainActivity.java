@@ -1,5 +1,7 @@
 package com.foodshake;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -7,8 +9,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,7 +23,9 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.os.Handler;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -114,14 +120,21 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 250);
 
-        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 
-        YelpParser yelpeParser = new YelpParser();
-        HashMap pref = new HashMap<>();
-        pref.put("type", "all");
-        pref.put("radius", "25000");
-        // yelpeParser.businessSearch(pref, location);
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        Location location = null;
+        try {
+            location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        }
+        catch (SecurityException e) {
+            Log.e("EXCEPTION", e.getMessage());
+        }
+
+        // HashMap pref = new HashMap<>();
+        // pref.put("type", "all");
+        // pref.put("radius", "25000");
+        // new SearchBusinessTask(pref, location).execute();
     }
 
     @Override
@@ -132,15 +145,32 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        mSensorManager.unregisterListener(mSensorListener);
         super.onPause();
+        mSensorManager.unregisterListener(mSensorListener);
     }
 
-    private class YelpCallTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... v) {
-            return null;
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+            // other 'case' lines to check for other
+            // permissions this app might request
         }
     }
 
+    public boolean checkLocationPermission()
+    {
+        String permission = "android.permission.ACCESS_FINE_LOCATION";
+        int res = this.checkCallingOrSelfPermission(permission);
+        return (res == PackageManager.PERMISSION_GRANTED);
+    }
 }

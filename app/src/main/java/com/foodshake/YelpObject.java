@@ -13,7 +13,7 @@ public class YelpObject {
 
     private YelpObject() {
         try {
-            instance = new YelpFusionApiFactory().createAPI(BuildConfig.consumer_key, BuildConfig.consumer_secret);
+            instance = new YelpFusionApiFactory().createAPI(BuildConfig.app_id, BuildConfig.app_secret);
         } catch (IOException e) {
             Log.e("EXCEPTION", e.getMessage());
         }

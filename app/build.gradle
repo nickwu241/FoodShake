@@ -17,6 +17,8 @@ android {
             buildConfigField "String", "consumer_secret", getMyApiKey("consumer_secret")
             buildConfigField "String", "token", getMyApiKey("token")
             buildConfigField "String", "token_secret", getMyApiKey("token_secret")
+            buildConfigField "String", "app_id", getMyApiKey("app_id")
+            buildConfigField "String", "app_secret", getMyApiKey("app_secret")
         }
         release {
             minifyEnabled false
