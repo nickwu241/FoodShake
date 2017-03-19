@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
                     RestaurantDB.selectedRestaurant = r;
                     Log.i("RESTAURANT", r.name);
 
-
                     Intent i = new Intent(getApplicationContext(), YourChoice.class);
                     startActivity(i);
                     break;
@@ -96,6 +95,8 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent i = new Intent(getApplicationContext(), PreferencesActivity.class);
+            startActivity(i);
             return true;
         }
 
