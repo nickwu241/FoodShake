@@ -37,7 +37,7 @@ public class YelpParser {
 
         // set terms : "food" "bars", NOT "food,bars"
         String foodType = userPreferences.get("type");
-        if (foodType == "all") {
+        if (foodType.equals("all")) {
             params.put("term", "food");
         } else {
             params.put("term", foodType + " " + "food");
