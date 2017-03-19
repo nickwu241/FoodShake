@@ -15,6 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.Toast;
 import android.content.Context;
 import android.hardware.Sensor;
@@ -29,6 +31,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class MainActivity extends AppCompatActivity {
 
     public static final int MESSAGE_SEARCH_BUSSINESS_SUCCESS = 1;
+    public static final int MESSAGE_SEARCH_REVIEWS_SUCCESS = 2;
 
     private SensorManager mSensorManager;
     private float mAccel; // acceleration apart from gravity
@@ -37,16 +40,35 @@ public class MainActivity extends AppCompatActivity {
     private Toast mToast;
 
     private SearchBusinessTask mSearchBusinessTask;
+    private SearchReviews mSearchReviewsTask;
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MESSAGE_SEARCH_BUSSINESS_SUCCESS:
                     int randomIndex = ThreadLocalRandom.current().nextInt(0, RestaurantDB.restaurants.size());
-                    Restaurant r = RestaurantDB.restaurants.get(randomIndex);
+                    boolean doneSelection = false;
+                    Restaurant r = null;
+                    while (!doneSelection) {
+                        doneSelection = true;
+                        r = RestaurantDB.restaurants.get(randomIndex);
+                        if (RestaurantDB.prefPriceGroup != null) {
+                            RadioButton selectedPrice = ((RadioButton) findViewById(RestaurantDB.prefPriceGroup.getCheckedRadioButtonId()));
+                            if (selectedPrice != null && r.price.length() > selectedPrice.getText().length()) {
+                                RestaurantDB.restaurants.remove(randomIndex);
+                                doneSelection = false;
+                            }
+                        }
+                    }
                     RestaurantDB.selectedRestaurant = r;
-                    Log.i("RESTAURANT", r.name);
+                    Log.i("RESTAURANT SELECTED", r.name);
+                    if (mSearchReviewsTask == null || mSearchReviewsTask.getStatus() == AsyncTask.Status.RUNNING) {
+                        mSearchReviewsTask = new SearchReviews(mHandler);
+                        mSearchReviewsTask.execute();
+                    }
+                    break;
 
+                case MESSAGE_SEARCH_REVIEWS_SUCCESS:
                     Intent i = new Intent(getApplicationContext(), YourChoice.class);
                     startActivity(i);
                     break;
@@ -67,16 +89,6 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
-
-
-
-
-//        HashMap pref = new HashMap<>();
-//        pref.put("type", "all");
-//        pref.put("radius", "25000");
-//        new SearchBusinessTask(pref, null, mHandler).execute();
     }
 
     @Override
@@ -126,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private void shakeAction() throws SecurityException {
+    private void shakeAction() {
         if (mSearchBusinessTask == null || mSearchBusinessTask.getStatus() != AsyncTask.Status.RUNNING) {
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 
@@ -141,8 +153,25 @@ public class MainActivity extends AppCompatActivity {
             }
 
             HashMap pref = new HashMap<>();
-            pref.put("type", "all");
-            pref.put("radius", "25000");
+            String userCategories = extractCategories();
+            if (userCategories != null) {
+                pref.put("category_filter", userCategories);
+            }
+
+            if (RestaurantDB.prefRadius != null) {
+                try {
+                    Integer.parseInt(RestaurantDB.prefRadius.getText().toString());
+                    pref.put("radius_filter", RestaurantDB.prefRadius.getText().toString());
+                }
+                catch (NumberFormatException e) {
+                    // default 25000
+                    pref.put("radius_filter", "25000");
+                }
+            }
+            else {
+                pref.put("radius_filter", "25000");
+            }
+
             mSearchBusinessTask = new SearchBusinessTask(pref, location, mHandler);
             mSearchBusinessTask.execute();
         }
@@ -183,5 +212,19 @@ public class MainActivity extends AppCompatActivity {
         String permission = "android.permission.ACCESS_FINE_LOCATION";
         int res = this.checkCallingOrSelfPermission(permission);
         return (res == PackageManager.PERMISSION_GRANTED);
+    }
+
+    private String extractCategories() {
+        if (RestaurantDB.prefAllBox == null || RestaurantDB.prefAllBox.isChecked()) {
+            return null;
+        }
+
+        String categories = "";
+        for (int i = 0; i < RestaurantDB.prefGridCatagories.getChildCount(); i++) {
+            if (((CheckBox)RestaurantDB.prefGridCatagories.getChildAt(i)).isChecked()) {
+                categories += RestaurantDB.prefGridCatagories.getChildAt(i).getTag() + ",";
+            }
+        }
+        return categories.substring(0, categories.length() - 2);
     }
 }

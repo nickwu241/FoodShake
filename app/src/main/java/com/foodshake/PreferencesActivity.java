@@ -24,6 +24,7 @@ public class PreferencesActivity extends AppCompatActivity {
         RestaurantDB.prefRadius = (EditText) findViewById(R.id.radius);
         RestaurantDB.prefGridCatagories = (GridLayout) findViewById(R.id.grid_categories);
         RestaurantDB.prefPriceGroup = (RadioGroup) findViewById(R.id.price_group);
+        RestaurantDB.prefAllBox = (CheckBox) findViewById(R.id.all);
     }
 
     public void onButtonClick(View view) {
@@ -32,7 +33,7 @@ public class PreferencesActivity extends AppCompatActivity {
                 // reset all to default
                 RestaurantDB.prefRadius.getText().clear();
                 ((RadioButton) findViewById(R.id.price_4)).setChecked(true);
-                ((CheckBox) findViewById(R.id.all)).setChecked(true);
+                RestaurantDB.prefAllBox.setChecked(true);
                 // now uncheck all other buttons
             case R.id.all:
                 for (int i = 0; i < RestaurantDB.prefGridCatagories.getChildCount(); i++) {

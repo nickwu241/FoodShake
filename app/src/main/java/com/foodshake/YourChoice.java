@@ -42,7 +42,7 @@ public class YourChoice extends AppCompatActivity {
         RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         ratingBar.setRating((float) RestaurantDB.selectedRestaurant.rating);
 
-
+        setReviews();
     }
 
     public void onDirectionsClick(View view) {

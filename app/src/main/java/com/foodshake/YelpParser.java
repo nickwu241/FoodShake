@@ -36,15 +36,15 @@ public class YelpParser {
         params.put("limit", "20");
 
         // set terms : "food" "bars", NOT "food,bars"
-        String foodType = userPreferences.get("type");
-        if (foodType.equals("all")) {
-            params.put("term", "food");
-        } else {
-            params.put("term", foodType + " " + "food");
+        params.put("term", "food");
+
+        String foodType = userPreferences.get("category_filter");
+        if (foodType != null) {
+            params.put("category_filter", foodType);
         }
 
         // set radius, default = 250000 meters, max = 400000 meters
-        String prefRadius = userPreferences.get("radius");
+        String prefRadius = userPreferences.get("radius_filter");
         params.put("radius_filter", prefRadius);
 
         // set location

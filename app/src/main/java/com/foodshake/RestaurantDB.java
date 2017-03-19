@@ -1,6 +1,7 @@
 package com.foodshake;
 
 import android.location.Location;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.RadioGroup;
@@ -30,10 +31,10 @@ public class RestaurantDB {
     public static Restaurant selectedRestaurant;
     public static Location currentLocation;
 
+    public static ArrayList<Review> reviewsForSelected;
+
     public static EditText prefRadius;
     public static GridLayout prefGridCatagories;
     public static RadioGroup prefPriceGroup;
-    public static ArrayList<Review> reviewsForSelected;
-
-
+    public static CheckBox prefAllBox;
 }
