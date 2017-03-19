@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context="com.foodshake.MainActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -13,13 +14,21 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_main" />
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+
         app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    <include
+        android:id="@+id/include3"
+        layout="@layout/content_main" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/hamburger" />
 
 </android.support.design.widget.CoordinatorLayout>

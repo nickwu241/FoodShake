@@ -9,16 +9,12 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Message;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.content.Context;
 import android.hardware.Sensor;
@@ -52,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("RESTAURANT", r.name);
 
 
-                    Intent i = new Intent(getApplicationContext(), FetchResultsActivity.class);
+                    Intent i = new Intent(getApplicationContext(), YourChoice.class);
                     startActivity(i);
                     break;
             }
@@ -130,17 +126,17 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private void shakeAction() throws SecurityException {
-        mToast = Toast.makeText(getApplicationContext(), "Device has shaken.", Toast.LENGTH_SHORT);
-        mToast.show();
-
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mToast.cancel();
-
-            }
-        }, 250);
+//        mToast = Toast.makeText(getApplicationContext(), "  ", Toast.LENGTH_SHORT);
+//        mToast.show();
+//
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                mToast.cancel();
+//
+//            }
+//        }, 250);
 
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 

@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
-public class FetchResultsActivity extends AppCompatActivity {
+public class YourChoice extends AppCompatActivity {
     public static TextView textViewObj;
 
 

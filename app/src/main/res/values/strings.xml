@@ -2,5 +2,5 @@
     <string name="app_name">Shaker</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_fetch_results">FetchResultsActivity</string>
-    <string name="trouble_finding_a_restaurant_shake_me">Trouble finding a restaurant? Shake me!</string>
+    <string name="trouble_finding_a_restaurant_shake_me">Trouble finding a restaurant? \n Shake me!</string>
 </resources>

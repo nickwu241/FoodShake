@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FetchResultsActivity"
+            android:name=".YourChoice"
             android:label="@string/title_activity_fetch_results"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
