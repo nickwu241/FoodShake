@@ -52,14 +52,12 @@ public class MainActivity extends AppCompatActivity {
                     while (!doneSelection) {
                         doneSelection = true;
                         r = RestaurantDB.restaurants.get(randomIndex);
-                        if (RestaurantDB.prefPriceGroup != null) {
-                            RadioButton selectedPrice = ((RadioButton) findViewById(RestaurantDB.prefPriceGroup.getCheckedRadioButtonId()));
-                            if (selectedPrice != null && r.price.length() > selectedPrice.getText().length()) {
-                                RestaurantDB.restaurants.remove(randomIndex);
-                                doneSelection = false;
-                            }
+                        if (r.price.length() > RestaurantDB.price) {
+                            RestaurantDB.restaurants.remove(randomIndex);
+                            doneSelection = false;
                         }
                     }
+
                     RestaurantDB.selectedRestaurant = r;
                     Log.i("RESTAURANT SELECTED", r.name);
                     if (mSearchReviewsTask == null || mSearchReviewsTask.getStatus() == AsyncTask.Status.RUNNING) {
@@ -157,20 +155,7 @@ public class MainActivity extends AppCompatActivity {
             if (userCategories != null) {
                 pref.put("category_filter", userCategories);
             }
-
-            if (RestaurantDB.prefRadius != null) {
-                try {
-                    Integer.parseInt(RestaurantDB.prefRadius.getText().toString());
-                    pref.put("radius_filter", RestaurantDB.prefRadius.getText().toString());
-                }
-                catch (NumberFormatException e) {
-                    // default 25000
-                    pref.put("radius_filter", "25000");
-                }
-            }
-            else {
-                pref.put("radius_filter", "25000");
-            }
+            pref.put("radius_filter", String.valueOf(RestaurantDB.radius));
 
             mSearchBusinessTask = new SearchBusinessTask(pref, location, mHandler);
             mSearchBusinessTask.execute();

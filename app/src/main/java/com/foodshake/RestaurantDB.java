@@ -37,4 +37,7 @@ public class RestaurantDB {
     public static GridLayout prefGridCatagories;
     public static RadioGroup prefPriceGroup;
     public static CheckBox prefAllBox;
+
+    public static int radius = 25000;
+    public static int price = 4;
 }
