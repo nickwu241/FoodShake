@@ -23,12 +23,13 @@
         android:gravity="center_vertical|center_horizontal"
         android:text="TextView"
         android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textSize="50dp"
+        android:textAllCaps="false"
+        android:textSize="30dp"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="5dp" />
 
     <RatingBar
+        android:isIndicator="true"
         android:id="@+id/ratingBar"
         android:layout_width="wrap_content"
         android:layout_height="44dp"
@@ -39,20 +40,6 @@
         android:numStars="0"
         android:textAlignment="center" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.03"
-        android:onClick="onDirectionsClick"
-        android:text="Directions" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.03"
-        android:onClick="onCallClick"
-        android:text="Call" />
-
     <TextView
         android:id="@+id/category"
         android:layout_width="match_parent"
@@ -61,4 +48,54 @@
         android:text="TextView"
         android:textAlignment="center" />
 
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.03"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingRight="10dp"
+            android:clickable="true"
+            android:onClick="onDirectionsClick"
+            app:backgroundTint="@android:color/white"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_place_black_48dp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="Directions" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/floatingActionButton2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:paddingRight="10dp"
+            android:onClick="onCallClick"
+            app:backgroundTint="@android:color/white"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_phone_black_48dp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="Call" />
+    </LinearLayout>
+
 </LinearLayout>
+
