@@ -18,6 +18,7 @@ public class PreferencesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_preferences);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // max radius is capped at 400000
         RestaurantDB.prefRadius = (EditText) findViewById(R.id.radius);
