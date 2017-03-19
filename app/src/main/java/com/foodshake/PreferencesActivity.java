@@ -46,6 +46,17 @@ public class PreferencesActivity extends AppCompatActivity {
                 break;
         }
     }
+    // TODO: Show previous state
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        RestaurantDB.prefRadius.getText().clear();
+//        ((RadioButton) findViewById(R.id.price_4)).setChecked(true);
+//        RestaurantDB.prefAllBox.setChecked(true);
+//        for (int i = 0; i < RestaurantDB.prefGridCatagories.getChildCount(); i++) {
+//
+//        }
+    }
 
     @Override
     protected void onPause() {

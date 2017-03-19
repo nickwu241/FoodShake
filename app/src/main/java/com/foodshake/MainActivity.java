@@ -9,6 +9,7 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Message;
+import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private float mAccelCurrent; // current acceleration including gravity
     private float mAccelLast; // last acceleration including gravity
     private Toast mToast;
+    private Vibrator mVibrator;
 
     private SearchBusinessTask mSearchBusinessTask;
     private SearchReviews mSearchReviewsTask;
@@ -67,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case MESSAGE_SEARCH_REVIEWS_SUCCESS:
+                    if (mVibrator != null) {
+                        mVibrator.cancel();
+                    }
                     Intent i = new Intent(getApplicationContext(), YourChoice.class);
                     startActivity(i);
                     break;
@@ -153,9 +158,14 @@ public class MainActivity extends AppCompatActivity {
             HashMap pref = new HashMap<>();
             String userCategories = extractCategories();
             if (userCategories != null) {
-                pref.put("category_filter", userCategories);
+                pref.put("type", userCategories);
             }
             pref.put("radius_filter", String.valueOf(RestaurantDB.radius));
+
+            mVibrator = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+            // Vibrate for 1000 milliseconds
+            long pattern[] = {50,100,50,100,50,100,400,100,300,100,350,50,200,100,100,50,600};
+            mVibrator.vibrate(pattern, 0);
 
             mSearchBusinessTask = new SearchBusinessTask(pref, location, mHandler);
             mSearchBusinessTask.execute();
@@ -210,6 +220,6 @@ public class MainActivity extends AppCompatActivity {
                 categories += RestaurantDB.prefGridCatagories.getChildAt(i).getTag() + ",";
             }
         }
-        return categories.substring(0, categories.length() - 2);
+        return categories.substring(0, categories.length() - 1);
     }
 }

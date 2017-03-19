@@ -4,9 +4,11 @@ import android.location.Location;
 
 import com.yelp.fusion.client.connection.YelpFusionApi;
 import com.yelp.fusion.client.models.Business;
+import com.yelp.fusion.client.models.Category;
 import com.yelp.fusion.client.models.SearchResponse;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +16,7 @@ import java.util.Map;
 import retrofit2.Call;
 
 public class YelpParser {
+    private static final String LIMIT = "200";
     private Map<String, String> params = new HashMap<>();
     private YelpFusionApi yelpAPI = YelpObject.getYelpAPI();
 
@@ -22,8 +25,18 @@ public class YelpParser {
         Call<SearchResponse> call = yelpAPI.getBusinessSearch(params);
         SearchResponse searchResponse = call.execute().body();
         ArrayList<Restaurant> restaurants = new ArrayList<>();
+        String types = userPreferences.get("type");
         for (Business b : searchResponse.getBusinesses()) {
-            restaurants.add(new Restaurant(b));
+            if (types != null) {
+                for (Category c : b.getCategories()) {
+                    if (types.contains(c.getAlias())) {
+                        restaurants.add(new Restaurant(b));
+                    }
+                }
+            }
+            else {
+                restaurants.add(new Restaurant(b));
+            }
         }
         return restaurants;
     }
@@ -33,14 +46,14 @@ public class YelpParser {
         params.put("sort", "0");
 
         // limit to 20 results
-        params.put("limit", "20");
+        params.put("limit", "50");
 
         // set terms : "food" "bars", NOT "food,bars"
         params.put("term", "food");
 
-        String foodType = userPreferences.get("category_filter");
+        String foodType = userPreferences.get("type");
         if (foodType != null) {
-            params.put("category_filter", foodType);
+            params.put("type", foodType);
         }
 
         // set radius, default = 250000 meters, max = 400000 meters

@@ -124,6 +124,7 @@
             android:layout_rowWeight="1"
             android:layout_weight="1"
             android:onClick="onButtonClick"
+            android:tag="korean"
             android:text="Korean" />
 
         <CheckBox
@@ -137,6 +138,7 @@
             android:layout_rowWeight="1"
             android:layout_weight="1"
             android:onClick="onButtonClick"
+            android:tag="japanese"
             android:text="Japanese" />
 
         <CheckBox
@@ -150,6 +152,7 @@
             android:layout_rowWeight="1"
             android:layout_weight="1"
             android:onClick="onButtonClick"
+            android:tag="thai"
             android:text="Thai" />
 
         <CheckBox
@@ -163,6 +166,7 @@
             android:layout_rowWeight="1"
             android:layout_weight="1"
             android:onClick="onButtonClick"
+            android:tag="malaysian"
             android:text="Malaysian" />
 
         <CheckBox
@@ -176,6 +180,7 @@
             android:layout_rowWeight="1"
             android:layout_weight="1"
             android:onClick="onButtonClick"
+            android:tag="chinese"
             android:text="Chinese" />
 
         <CheckBox
@@ -189,6 +194,7 @@
             android:layout_rowWeight="1"
             android:layout_weight="1"
             android:onClick="onButtonClick"
+            android:tag="vietnamese"
             android:text="Vietnamese" />
 
         <CheckBox
@@ -202,6 +208,7 @@
             android:layout_rowWeight="1"
             android:layout_weight="1"
             android:onClick="onButtonClick"
+            android:tag="greek"
             android:text="Greek" />
 
         <CheckBox
@@ -215,6 +222,7 @@
             android:layout_rowWeight="1"
             android:layout_weight="1"
             android:onClick="onButtonClick"
+            android:tag="mexican"
             android:text="Mexican" />
 
         <CheckBox
@@ -228,6 +236,7 @@
             android:layout_rowWeight="1"
             android:layout_weight="1"
             android:onClick="onButtonClick"
+            android:tag="italian"
             android:text="Italian" />
 
         <CheckBox
@@ -241,6 +250,7 @@
             android:layout_rowWeight="1"
             android:layout_weight="1"
             android:onClick="onButtonClick"
+            android:tag="vegetarian"
             android:text="Vegetarian" />
 
         <CheckBox
@@ -254,6 +264,7 @@
             android:layout_rowWeight="1"
             android:layout_weight="1"
             android:onClick="onButtonClick"
+            android:tag="mediterranean"
             android:text="Mediterranean" />
 
         <CheckBox
@@ -267,6 +278,7 @@
             android:layout_rowWeight="1"
             android:layout_weight="1"
             android:onClick="onButtonClick"
+            android:tag="afghani"
             android:text="Afghani" />
 
         <CheckBox
@@ -280,6 +292,7 @@
             android:layout_rowWeight="1"
             android:layout_weight="1"
             android:onClick="onButtonClick"
+            android:tag="brazilian"
             android:text="Brazilian" />
 
         <CheckBox
@@ -293,6 +306,7 @@
             android:layout_rowWeight="1"
             android:layout_weight="1"
             android:onClick="onButtonClick"
+            android:tag="british"
             android:text="British" />
 
         <CheckBox
@@ -306,6 +320,7 @@
             android:layout_rowWeight="1"
             android:layout_weight="1"
             android:onClick="onButtonClick"
+            android:tag="hotdogs"
             android:text="Fast Food" />
 
     </GridLayout>

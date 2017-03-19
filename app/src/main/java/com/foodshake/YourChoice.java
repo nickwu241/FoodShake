@@ -1,6 +1,7 @@
 package com.foodshake;
 
 import android.Manifest;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -54,6 +55,19 @@ public class YourChoice extends AppCompatActivity {
     public void onCallClick(View view) {
         startActivity(new Intent(Intent.ACTION_DIAL).setData(
                 Uri.parse("tel:" + RestaurantDB.selectedRestaurant.phoneNumber.trim())));
+    }
+
+    public void onInfoClick(View view) {
+        Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(RestaurantDB.selectedRestaurant.URL));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setPackage("com.android.chrome");
+        try {
+            getApplication().startActivity(intent);
+        } catch (ActivityNotFoundException ex) {
+            // Chrome browser presumably not installed so allow user to choose instead
+            intent.setPackage(null);
+            getApplication().startActivity(intent);
+        }
     }
 
     public void setReviews() {
