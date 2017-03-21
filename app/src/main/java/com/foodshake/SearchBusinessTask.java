@@ -25,17 +25,17 @@ public class SearchBusinessTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... v) {
         try {
-            RestaurantDB.restaurants = new YelpParser().businessSearch(mPreferences, mLocaction);
+            AppDB.restaurants = new YelpParser().businessSearch(mPreferences, mLocaction);
         }
         catch (IOException e) {
-            Log.e("EXCEPTION", e.getMessage());
-            RestaurantDB.restaurants = null;
+            Log.e(Constants.TAG_EXCEPTION, e.getMessage());
+            AppDB.restaurants = null;
         }
         return null;
     }
 
     @Override
     protected void onPostExecute(Void v) {
-        mHandler.obtainMessage(MainActivity.MESSAGE_SEARCH_BUSSINESS_SUCCESS).sendToTarget();
+        mHandler.obtainMessage(Constants.MESSAGE_SEARCH_BUSSINESS_SUCCESS).sendToTarget();
     }
 }

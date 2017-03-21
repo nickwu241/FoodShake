@@ -5,24 +5,10 @@ import com.yelp.fusion.client.models.Category;
 import com.yelp.fusion.client.models.Coordinates;
 import com.yelp.fusion.client.models.Hour;
 import com.yelp.fusion.client.models.Location;
-import com.yelp.fusion.client.models.Review;
-import com.yelp.fusion.client.models.Reviews;
 
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
 
-import retrofit2.Call;
-
-import static com.foodshake.YelpObject.getYelpAPI;
-
-/**
- * Created by chaneric on 2017-03-18.
- */
-
 public class Restaurant {
-
     public String id;   // the unique ID of the restaurant
     public String name; // the name of the restaurant
     public String imageURL; // the URL for the image associated with the restaurant
@@ -58,11 +44,5 @@ public class Restaurant {
         this.categories = businessObject.getCategories();
         this.businessObj = businessObject;
     }
-
-
-
-
-
-
 
 }

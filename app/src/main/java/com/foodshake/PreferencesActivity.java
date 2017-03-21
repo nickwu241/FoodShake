@@ -21,23 +21,23 @@ public class PreferencesActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // max radius is capped at 400000
-        RestaurantDB.prefRadius = (EditText) findViewById(R.id.radius);
-        RestaurantDB.prefGridCatagories = (GridLayout) findViewById(R.id.grid_categories);
-        RestaurantDB.prefPriceGroup = (RadioGroup) findViewById(R.id.price_group);
-        RestaurantDB.prefAllBox = (CheckBox) findViewById(R.id.all);
+        AppDB.prefRadius = (EditText) findViewById(R.id.radius);
+        AppDB.prefGridCatagories = (GridLayout) findViewById(R.id.grid_categories);
+        AppDB.prefPriceGroup = (RadioGroup) findViewById(R.id.price_group);
+        AppDB.prefAllBox = (CheckBox) findViewById(R.id.all);
     }
 
     public void onButtonClick(View view) {
         switch (view.getId()) {
             case R.id.reset_default:
                 // reset all to default
-                RestaurantDB.prefRadius.getText().clear();
+                AppDB.prefRadius.getText().clear();
                 ((RadioButton) findViewById(R.id.price_4)).setChecked(true);
-                RestaurantDB.prefAllBox.setChecked(true);
+                AppDB.prefAllBox.setChecked(true);
                 // now uncheck all other buttons
             case R.id.all:
-                for (int i = 0; i < RestaurantDB.prefGridCatagories.getChildCount(); i++) {
-                    ((CheckBox) RestaurantDB.prefGridCatagories.getChildAt(i)).setChecked(false);
+                for (int i = 0; i < AppDB.prefGridCatagories.getChildCount(); i++) {
+                    ((CheckBox) AppDB.prefGridCatagories.getChildAt(i)).setChecked(false);
                 }
                 break;
             default:
@@ -50,10 +50,10 @@ public class PreferencesActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-//        RestaurantDB.prefRadius.getText().clear();
+//        AppDB.prefRadius.getText().clear();
 //        ((RadioButton) findViewById(R.id.price_4)).setChecked(true);
-//        RestaurantDB.prefAllBox.setChecked(true);
-//        for (int i = 0; i < RestaurantDB.prefGridCatagories.getChildCount(); i++) {
+//        AppDB.prefAllBox.setChecked(true);
+//        for (int i = 0; i < AppDB.prefGridCatagories.getChildCount(); i++) {
 //
 //        }
     }
@@ -62,19 +62,19 @@ public class PreferencesActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         try {
-            RestaurantDB.radius = Integer.parseInt(RestaurantDB.prefRadius.getText().toString());
+            AppDB.radius = Integer.parseInt(AppDB.prefRadius.getText().toString());
         }
         catch (NumberFormatException e) {
             // default 25000
-            RestaurantDB.radius = 25000;
+            AppDB.radius = 25000;
         }
 
-        RadioButton selectedPrice = ((RadioButton) findViewById(RestaurantDB.prefPriceGroup.getCheckedRadioButtonId()));
+        RadioButton selectedPrice = ((RadioButton) findViewById(AppDB.prefPriceGroup.getCheckedRadioButtonId()));
         if (selectedPrice != null) {
-            RestaurantDB.price = selectedPrice.getText().length();
+            AppDB.price = selectedPrice.getText().length();
         }
         else {
-            RestaurantDB.price = 4;
+            AppDB.price = 4;
         }
     }
 

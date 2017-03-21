@@ -15,18 +15,7 @@ import java.util.ArrayList;
 
 import retrofit2.Call;
 
-public class RestaurantDB {
-    public static ArrayList<Review> getReviews(Business businessObj) {
-        Call<Reviews> hello = YelpObject.getYelpAPI().getBusinessReviews(businessObj.getId(),"");
-        try {
-            ArrayList<Review> rev = hello.execute().body().getReviews();
-            return rev;
-        }
-        catch (IOException e) {
-            System.out.println("Wifi Error");
-        }
-        return null;
-    }
+public class AppDB {
     public static ArrayList<Restaurant> restaurants;
     public static Restaurant selectedRestaurant;
     public static Location currentLocation;

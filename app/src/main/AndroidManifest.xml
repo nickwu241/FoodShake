@@ -28,8 +28,8 @@
         </activity>
         <activity
             android:screenOrientation="portrait"
-            android:name=".YourChoice"
-            android:label="@string/title_activity_fetch_results"
+            android:name=".ResultsActivity"
+            android:label="@string/title_activity_results"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -40,7 +40,7 @@
         <activity
             android:screenOrientation="portrait"
             android:name=".PreferencesActivity"
-            android:label="@string/title_activity_fetch_result"
+            android:label="@string/title_activity_results"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

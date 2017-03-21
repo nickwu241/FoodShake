@@ -10,7 +10,7 @@
 
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
 
-    tools:context="com.foodshake.YourChoice"
+    tools:context="com.foodshake.YourChoiceActivity"
     tools:showIn="@layout/activity_fetch_results"
     android:weightSum="1"
     android:label = ""

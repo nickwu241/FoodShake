@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/teal"
-    tools:context="com.foodshake.YourChoice">
+    tools:context="com.foodshake.YourChoiceActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
     </android.support.design.widget.AppBarLayout>
 
 
-    <include layout="@layout/content_fetch_results" />
+    <include layout="@layout/content_results" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButton6"

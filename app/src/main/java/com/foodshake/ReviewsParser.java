@@ -8,11 +8,9 @@ import java.util.ArrayList;
 
 import retrofit2.Call;
 
-public class ReviewParser {
-    private static final String LOCALE = "en_CA";
-
+public class ReviewsParser {
     public static ArrayList<Review> getReviews(String businessID) throws IOException {
-        Call<Reviews> call = YelpObject.getYelpAPI().getBusinessReviews(businessID, LOCALE);
+        Call<Reviews> call = YelpApiProvider.getYelpApi().getBusinessReviews(businessID, Constants.LOCALE);
         return call.execute().body().getReviews();
     }
 }

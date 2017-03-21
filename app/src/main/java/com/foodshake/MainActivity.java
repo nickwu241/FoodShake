@@ -1,13 +1,18 @@
 package com.foodshake;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
 import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
@@ -17,23 +22,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CheckBox;
-import android.widget.RadioButton;
 import android.widget.Toast;
-import android.content.Context;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.os.Handler;
 
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
-
 public class MainActivity extends AppCompatActivity {
-
-    public static final int MESSAGE_SEARCH_BUSSINESS_SUCCESS = 1;
-    public static final int MESSAGE_SEARCH_REVIEWS_SUCCESS = 2;
-
     private SensorManager mSensorManager;
     private float mAccel; // acceleration apart from gravity
     private float mAccelCurrent; // current acceleration including gravity
@@ -42,37 +36,37 @@ public class MainActivity extends AppCompatActivity {
     private Vibrator mVibrator;
 
     private SearchBusinessTask mSearchBusinessTask;
-    private SearchReviews mSearchReviewsTask;
+    private SearchReviewsTask mSearchReviewsTask;
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case MESSAGE_SEARCH_BUSSINESS_SUCCESS:
-                    int randomIndex = ThreadLocalRandom.current().nextInt(0, RestaurantDB.restaurants.size());
+                case Constants.MESSAGE_SEARCH_BUSSINESS_SUCCESS:
+                    int randomIndex = ThreadLocalRandom.current().nextInt(0, AppDB.restaurants.size());
                     boolean doneSelection = false;
                     Restaurant r = null;
                     while (!doneSelection) {
                         doneSelection = true;
-                        r = RestaurantDB.restaurants.get(randomIndex);
-                        if (r.price.length() > RestaurantDB.price) {
-                            RestaurantDB.restaurants.remove(randomIndex);
+                        r = AppDB.restaurants.get(randomIndex);
+                        if (r.price.length() > AppDB.price) {
+                            AppDB.restaurants.remove(randomIndex);
                             doneSelection = false;
                         }
                     }
 
-                    RestaurantDB.selectedRestaurant = r;
+                    AppDB.selectedRestaurant = r;
                     Log.i("RESTAURANT SELECTED", r.name);
                     if (mSearchReviewsTask == null || mSearchReviewsTask.getStatus() == AsyncTask.Status.RUNNING) {
-                        mSearchReviewsTask = new SearchReviews(mHandler);
+                        mSearchReviewsTask = new SearchReviewsTask(mHandler);
                         mSearchReviewsTask.execute();
                     }
                     break;
 
-                case MESSAGE_SEARCH_REVIEWS_SUCCESS:
+                case Constants.MESSAGE_SEARCH_REVIEWS_SUCCESS:
                     if (mVibrator != null) {
                         mVibrator.cancel();
                     }
-                    Intent i = new Intent(getApplicationContext(), YourChoice.class);
+                    Intent i = new Intent(getApplicationContext(), ResultsActivity.class);
                     startActivity(i);
                     break;
             }
@@ -149,10 +143,10 @@ public class MainActivity extends AppCompatActivity {
             Location location = null;
             try {
                 location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                RestaurantDB.currentLocation = location;
+                AppDB.currentLocation = location;
             }
             catch (SecurityException e) {
-                Log.e("EXCEPTION", e.getMessage());
+                Log.e(Constants.TAG_EXCEPTION, e.getMessage());
             }
 
             HashMap pref = new HashMap<>();
@@ -160,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
             if (userCategories != null) {
                 pref.put("type", userCategories);
             }
-            pref.put("radius_filter", String.valueOf(RestaurantDB.radius));
+            pref.put("radius_filter", String.valueOf(AppDB.radius));
 
             mVibrator = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
             // Vibrate for 1000 milliseconds
@@ -210,14 +204,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String extractCategories() {
-        if (RestaurantDB.prefAllBox == null || RestaurantDB.prefAllBox.isChecked()) {
+        if (AppDB.prefAllBox == null || AppDB.prefAllBox.isChecked()) {
             return null;
         }
 
         String categories = "";
-        for (int i = 0; i < RestaurantDB.prefGridCatagories.getChildCount(); i++) {
-            if (((CheckBox)RestaurantDB.prefGridCatagories.getChildAt(i)).isChecked()) {
-                categories += RestaurantDB.prefGridCatagories.getChildAt(i).getTag() + ",";
+        for (int i = 0; i < AppDB.prefGridCatagories.getChildCount(); i++) {
+            if (((CheckBox)AppDB.prefGridCatagories.getChildAt(i)).isChecked()) {
+                categories += AppDB.prefGridCatagories.getChildAt(i).getTag() + ",";
             }
         }
         return categories.substring(0, categories.length() - 1);

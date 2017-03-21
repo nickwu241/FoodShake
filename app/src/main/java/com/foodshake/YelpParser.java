@@ -8,7 +8,6 @@ import com.yelp.fusion.client.models.Category;
 import com.yelp.fusion.client.models.SearchResponse;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,14 +17,16 @@ import retrofit2.Call;
 public class YelpParser {
     private static final String LIMIT = "50";
     private Map<String, String> params = new HashMap<>();
-    private YelpFusionApi yelpAPI = YelpObject.getYelpAPI();
 
     public ArrayList<Restaurant> businessSearch(Map<String, String> userPreferences, Location loc) throws IOException {
         setUpParams(userPreferences, loc);
-        Call<SearchResponse> call = yelpAPI.getBusinessSearch(params);
+
+        Call<SearchResponse> call = YelpApiProvider.getYelpApi().getBusinessSearch(params);
         SearchResponse searchResponse = call.execute().body();
+
         ArrayList<Restaurant> restaurants = new ArrayList<>();
         String types = userPreferences.get("type");
+
         for (Business b : searchResponse.getBusinesses()) {
             if (types != null) {
                 for (Category c : b.getCategories()) {
