@@ -1,36 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal"
-    tools:context="com.foodshake.MainActivity">
+    android:orientation="vertical"
+    tools:context="com.nwu.foodshake.MainActivity">
 
-    <android.support.design.widget.AppBarLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:orientation="horizontal">
 
-    </android.support.design.widget.AppBarLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="sendRequest"
+            android:text="FIND RESTAURANT"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp" />
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/teal"
-        android:titleTextColor="@color/colorPrimary"
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="goToSettings"
+            android:text="SETTINGS" />
 
-        app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-    <include
-        android:id="@+id/include3"
-        layout="@layout/content_main" />
+    </LinearLayout>
 
     <ImageView
-        android:id="@+id/imageView2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/hamburger" />
+        android:layout_height="400dp"
+        app:srcCompat="@drawable/hungry_640" />
 
-</android.support.design.widget.CoordinatorLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Trouble finding a restaurant?\nShake me!"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+</android.widget.LinearLayout>

@@ -1,4 +1,4 @@
-package com.foodshake;
+package com.nwu.foodshake;
 
 import org.junit.Test;
 

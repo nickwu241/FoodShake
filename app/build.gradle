@@ -4,30 +4,23 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "com.foodshake"
-        minSdkVersion 21
+        applicationId "com.nwu.foodshake"
+        minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         applicationVariants.all { variant ->
-            buildConfigField "String", "consumer_key", getMyApiKey("consumer_key")
-            buildConfigField "String", "consumer_secret", getMyApiKey("consumer_secret")
-            buildConfigField "String", "token", getMyApiKey("token")
-            buildConfigField "String", "token_secret", getMyApiKey("token_secret")
-            buildConfigField "String", "app_id", getMyApiKey("app_id")
-            buildConfigField "String", "app_secret", getMyApiKey("app_secret")
+            buildConfigField "String", "client_id", getMyApiKey("client_id")
+            buildConfigField "String", "client_secret", getMyApiKey("client_secret")
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-    }
-    packagingOptions {
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/LICENSE'
     }
 }
 
@@ -36,15 +29,14 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'io.github.ranga543:yelp-fusion-client:0.1.2'
+    compile 'com.github.nickwu241:android-yelp-v3-api:0.1.1'
     compile 'com.android.support:appcompat-v7:25.2.0'
-    compile 'com.android.support:design:25.2.0'
-    testCompile 'junit:junit:4.12'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.google.android.gms:play-services-maps:10.2.0'
+    compile 'com.android.support:support-v4:25.2.0'
+    compile 'com.android.support:support-vector-drawable:25.2.0'
+    testCompile 'junit:junit:4.12'
 }
 
-//return a MY API KEY from a properties file.
 def getMyApiKey(String property) {
     Properties properties = new Properties()
     properties.load(new FileInputStream("secrets.properties"))

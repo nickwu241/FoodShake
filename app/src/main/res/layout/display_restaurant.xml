@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/restaurant_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="restaurant name"
+        android:textAlignment="center"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/restaurant_categories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="categories"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/restaurant_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="price"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/restaurant_rating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="rating"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/restaurant_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="address"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/restaurant_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="phone number"
+        android:textAlignment="center" />
+
+    <ImageView
+        android:id="@+id/restaurant_picture"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@android:color/background_light" />
+</LinearLayout>
