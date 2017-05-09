@@ -97,14 +97,12 @@
                 android:orientation="horizontal">
 
                 <android.support.design.widget.FloatingActionButton
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:clickable="true"
-                    android:onClick="call"
                     app:backgroundTint="@color/colorAccent"
-                    app:fabSize="normal"
-                    app:srcCompat="@drawable/yelp_burst_positive_rgb"/>
+                    app:fabSize="mini"
+                    app:srcCompat="@drawable/ic_call"/>
 
                 <TextView
                     android:id="@+id/restaurant_phone"
@@ -114,6 +112,7 @@
                     android:layout_marginLeft="40dp"
                     android:layout_weight="1"
                     android:text="phone number"/>
+
             </FrameLayout>
 
             <FrameLayout
@@ -122,14 +121,11 @@
                 android:layout_gravity="right|center_vertical">
 
                 <android.support.design.widget.FloatingActionButton
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:clickable="true"
-                    android:onClick="directions"
-                    app:backgroundTint="@color/colorAccent"
-                    app:fabSize="normal"
-                    app:srcCompat="@drawable/yelp_burst_positive_rgb"/>
+                    app:fabSize="mini"
+                    app:srcCompat="@drawable/ic_directions"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -137,7 +133,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="40dp"
                     android:layout_weight="1"
-                    android:text="get directions"/>
+                    android:text="Get directions"/>
             </FrameLayout>
 
             <FrameLayout
@@ -146,14 +142,11 @@
                 android:layout_gravity="bottom|right">
 
                 <android.support.design.widget.FloatingActionButton
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:clickable="true"
-                    android:onClick="moreInfo"
-                    app:backgroundTint="@color/colorAccent"
-                    app:fabSize="normal"
-                    app:srcCompat="@drawable/yelp_burst_positive_rgb"/>
+                    app:fabSize="mini"
+                    app:srcCompat="@drawable/ic_info"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -161,7 +154,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="40dp"
                     android:layout_weight="1"
-                    android:text="more information"/>
+                    android:text="More information"/>
             </FrameLayout>
 
         </FrameLayout>
