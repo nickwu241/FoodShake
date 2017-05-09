@@ -20,13 +20,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.nwu.foodshake.screen.ResultScreen;
 import com.nwu.foodshake.screen.Screen;
 import com.nwu.yelpapi.pojo.Business;
 import com.nwu.yelpapi.pojo.SearchResponse;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements Screen {
@@ -167,6 +168,21 @@ public class MainActivity extends AppCompatActivity implements Screen {
     }
 
     //----------------------------------------------------------------------------------------------
+    public void call(View view) {
+        if (Debug.ON) Log.i(TAG, "CALL");
+    }
+
+    //----------------------------------------------------------------------------------------------
+    public void directions(View view) {
+        if (Debug.ON) Log.i(TAG, "DIRECTIONS");
+    }
+
+    //----------------------------------------------------------------------------------------------
+    public void moreInfo(View view) {
+        if (Debug.ON) Log.i(TAG, "MORE INFO");
+    }
+
+    //----------------------------------------------------------------------------------------------
     // TODO: remove View parameter once done testing
     public void sendRequest(View view) {
         // only send Yelp API requests one at a time
@@ -179,6 +195,15 @@ public class MainActivity extends AppCompatActivity implements Screen {
             return;
         }
 
+        // try cache first so we don't need to do a search API
+        List<Business> cachedBusinesses = mApp.getCachedBusinesses();
+        if (cachedBusinesses != null && cachedBusinesses.size() > 0) {
+            mVibrator.vibrate(Constants.VIBRATION_PATTERN_USER_FEEDBACK, 0);
+            randomSelectAndBusinessAPI(cachedBusinesses);
+            return;
+        }
+
+        // no cache, we need to do a search to get a list of restaurants
         // check if we have a fixed location
         if (mLastLocation == null) {
             // if not, try to get the last one
@@ -218,14 +243,12 @@ public class MainActivity extends AppCompatActivity implements Screen {
     }
 
     //----------------------------------------------------------------------------------------------
-    private void handleSearchResponse(SearchResponse searchResponse) {
-        if (Debug.ON) Log.i(TAG, mApp.gson.toJson(searchResponse));
+    private void randomSelectAndBusinessAPI(List<Business> businesses) {
+        if (Debug.ON) Log.i(TAG, mApp.gson.toJson(businesses));
 
-        Business randomBusiness = Util.getRandom(searchResponse.businesses);
-        if (randomBusiness == null) {
-            handleError(Constants.ERROR_NO_RESTAURANT);
-            return;
-        }
+        Business randomBusiness = Util.getRandom(businesses);
+        businesses.remove(randomBusiness);
+        mApp.cacheBusinesses(businesses);
         mYelp.business(randomBusiness.id);
     }
 
@@ -283,7 +306,12 @@ public class MainActivity extends AppCompatActivity implements Screen {
             MainActivity main = mMainActivity.get();
             switch (msg.what) {
                 case Constants.RESPONSE_SEARCH:
-                    main.handleSearchResponse((SearchResponse) msg.obj);
+                    SearchResponse sr = (SearchResponse) msg.obj;
+                    if (sr.total == 0) {
+                        main.handleError(Constants.ERROR_NO_RESTAURANT);
+                        return;
+                    }
+                    main.randomSelectAndBusinessAPI(new ArrayList<Business>(sr.businesses));
                     break;
 
                 case Constants.RESPONSE_BUSINESS:

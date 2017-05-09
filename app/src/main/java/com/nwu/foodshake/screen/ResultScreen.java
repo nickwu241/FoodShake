@@ -1,6 +1,7 @@
 package com.nwu.foodshake.screen;
 
 import android.app.Activity;
+import android.view.View;
 
 import com.nwu.foodshake.page.ResultPage;
 import com.nwu.yelpapi.pojo.Business;
