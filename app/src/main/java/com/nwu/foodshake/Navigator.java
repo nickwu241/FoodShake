@@ -35,6 +35,13 @@ public class Navigator {
     }
 
     //----------------------------------------------------------------------------------------------
+    public void pop() {
+        if (screenStack.size() > 1) {
+            screenStack.removeFirst();
+        }
+    }
+
+    //----------------------------------------------------------------------------------------------
     public void back() {
         if (screenStack.size() > 1) {
             screenStack.removeFirst();

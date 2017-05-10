@@ -118,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements Screen {
         });
 
         mApp.getNavigator().setUp(this);
+        sendRequest(null);
     }
 
     //----------------------------------------------------------------------------------------------
@@ -262,10 +263,12 @@ public class MainActivity extends AppCompatActivity implements Screen {
             return;
         }
 
-        if (mResultScreen == null) {
-            mResultScreen = new ResultScreen();
+        // if we're already on the result screen screen
+        if (mResultScreen != null) {
+            mApp.getNavigator().pop();
         }
-        mResultScreen.setBusiness(business);
+
+        mResultScreen = new ResultScreen(business);
         mVibrator.cancel();
         mApp.getNavigator().goTo(mResultScreen);
     }

@@ -55,64 +55,14 @@ public class ResultPage implements Page {
 
     //----------------------------------------------------------------------------------------------
     private void populateView(ResultScreen screen) {
-        Business business = screen.getBusiness();
-
-        new GetImageTask().execute(business.image_url);
-
-        restaurantName.setText(business.name);
-
-        // TODO: repeated join logic here
-        String displayCat = "";
-        for (Category c : business.categories) {
-            displayCat += c.title + ", ";
-        }
-        displayCat = displayCat.length() > 0 ?
-                displayCat.substring(0, displayCat.length() - 2) : "";
-        restaurantCategories.setText(displayCat);
-
-        restaurantPrice.setText(business.price);
-        restaurantAddress.setText(business.location.address1);
-        restaurantPhone.setText(business.display_phone);
-        restaurantNumReviews.setText("based on " + business.review_count +
-                (business.review_count == 1 ? " review" : " reviews"));
-        restaurantStars.setImageResource(getResourceFromRating(business.rating));
-    }
-
-    //----------------------------------------------------------------------------------------------
-    private int getResourceFromRating(double rating) {
-        final int flooredRating = (int) rating;
-        final boolean whole = flooredRating == rating;
-        switch (flooredRating) {
-            case 0: return R.drawable.stars_small_0;
-            case 1: return whole ? R.drawable.stars_small_1 : R.drawable.stars_small_1_half;
-            case 2: return whole ? R.drawable.stars_small_2 : R.drawable.stars_small_2_half;
-            case 3: return whole ? R.drawable.stars_small_3 : R.drawable.stars_small_3_half;
-            case 4: return whole ? R.drawable.stars_small_4 : R.drawable.stars_small_4_half;
-            case 5: return R.drawable.stars_small_5;
-            default: throw new IllegalArgumentException("Invalid Rating: " + rating);
-        }
-    }
-
-    //----------------------------------------------------------------------------------------------
-    private class GetImageTask extends AsyncTask<String, Void, Bitmap> {
-        @Override
-        protected Bitmap doInBackground(String... params) {
-            String url = params[0];
-            try {
-                return BitmapFactory.decodeStream(new URL(url).openStream());
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-                return null;
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap result) {
-            restaurantImage.setImageBitmap(result);
-        }
+        restaurantName.setText(screen.name);
+        restaurantCategories.setText(screen.categories);
+        restaurantPrice.setText(screen.price);
+        restaurantAddress.setText(screen.address);
+        restaurantPhone.setText(screen.phone);
+        restaurantNumReviews.setText(screen.numReviews);
+        restaurantImage.setImageBitmap(screen.image);
+        restaurantStars.setImageResource(screen.stars);
     }
 
     //----------------------------------------------------------------------------------------------
