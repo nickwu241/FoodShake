@@ -101,6 +101,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="true"
+                    android:onClick="call"
                     app:backgroundTint="@color/colorAccent"
                     app:fabSize="mini"
                     app:srcCompat="@drawable/ic_call"/>
@@ -125,6 +126,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="true"
+                    android:onClick="directions"
                     app:fabSize="mini"
                     app:srcCompat="@drawable/ic_directions"/>
 
@@ -146,6 +148,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="true"
+                    android:onClick="moreInfo"
                     app:fabSize="mini"
                     app:srcCompat="@drawable/ic_info"/>
 

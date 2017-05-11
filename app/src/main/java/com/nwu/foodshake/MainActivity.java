@@ -2,6 +2,7 @@ package com.nwu.foodshake;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,6 +11,7 @@ import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -171,16 +173,30 @@ public class MainActivity extends AppCompatActivity implements Screen {
     //----------------------------------------------------------------------------------------------
     public void call(View view) {
         if (Debug.ON) Log.i(TAG, "CALL");
+        startActivity(new Intent(Intent.ACTION_DIAL).setData(Uri.parse("tel:" + mResultScreen.phone)));
     }
 
     //----------------------------------------------------------------------------------------------
     public void directions(View view) {
         if (Debug.ON) Log.i(TAG, "DIRECTIONS");
+        String result = mResultScreen.id;
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri
+                .parse("http://maps.google.com/?q=" + result)));
     }
 
     //----------------------------------------------------------------------------------------------
     public void moreInfo(View view) {
         if (Debug.ON) Log.i(TAG, "MORE INFO");
+        Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(mResultScreen.url));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setPackage("com.android.chrome");
+        try {
+            getApplication().startActivity(intent);
+        } catch (ActivityNotFoundException ex) {
+            // Chrome browser presumably not installed so allow user to choose instead
+            intent.setPackage(null);
+            getApplication().startActivity(intent);
+        }
     }
 
     //----------------------------------------------------------------------------------------------

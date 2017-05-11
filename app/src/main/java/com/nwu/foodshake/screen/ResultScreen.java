@@ -27,6 +27,9 @@ public class ResultScreen implements Screen {
     public final String numReviews;
     public final String hourToday;
 
+    public final String url;
+    public final String id;
+
     public final int stars;
     public Bitmap image;
 
@@ -56,6 +59,9 @@ public class ResultScreen implements Screen {
         // for now, there's only 1 item in the hours array
         Business.Hour.Open open = business.hours.get(0).open.get(dayOfWeek());
         hourToday = open.start + " - " + open.end;
+
+        url = business.url;
+        id = business.id;
 
         mBusinessImageUrl = business.image_url;
     }
