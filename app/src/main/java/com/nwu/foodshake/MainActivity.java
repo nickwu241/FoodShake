@@ -152,13 +152,12 @@ public class MainActivity extends AppCompatActivity implements Screen {
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case Constants.PERMISSION_FINE_LOCATION:
-                if (Debug.ON) {
-                    // if request is cancelled, the result arrays are empty.
-                    if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                        Log.i(TAG, "GRANTED: Location Permissions");
-                        return;
-                    }
+                // if request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (Debug.ON) Log.i(TAG, "GRANTED: Location Permissions");
+                    return;
                 }
+                
                 if (Debug.ON) Log.e(TAG, "DENIED: Location Permissions");
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, Constants.PERMISSION_FINE_LOCATION);
                 break;
@@ -173,15 +172,16 @@ public class MainActivity extends AppCompatActivity implements Screen {
     //----------------------------------------------------------------------------------------------
     public void call(View view) {
         if (Debug.ON) Log.i(TAG, "CALL");
-        startActivity(new Intent(Intent.ACTION_DIAL).setData(Uri.parse("tel:" + mResultScreen.phone)));
+        startActivity(new Intent(Intent.ACTION_DIAL).setData(
+                Uri.parse("tel:" + mResultScreen.phone)));
     }
 
     //----------------------------------------------------------------------------------------------
     public void directions(View view) {
         if (Debug.ON) Log.i(TAG, "DIRECTIONS");
         String result = mResultScreen.id;
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri
-                .parse("http://maps.google.com/?q=" + result)));
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(
+                "http://maps.google.com/?q=" + result)));
     }
 
     //----------------------------------------------------------------------------------------------
