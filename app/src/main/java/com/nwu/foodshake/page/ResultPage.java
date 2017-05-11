@@ -29,6 +29,7 @@ public class ResultPage implements Page {
     private TextView restaurantAddress;
     private TextView restaurantPhone;
     private TextView restaurantNumReviews;
+    private TextView restaurantHourToday;
     private ImageView restaurantImage;
     private ImageView restaurantStars;
 
@@ -48,6 +49,7 @@ public class ResultPage implements Page {
         restaurantAddress = (TextView) mActivity.findViewById(R.id.restaurant_address);
         restaurantPhone = (TextView) mActivity.findViewById(R.id.restaurant_phone);
         restaurantNumReviews = (TextView) mActivity.findViewById(R.id.restaurant_num_reviews);
+        restaurantHourToday = (TextView) mActivity.findViewById(R.id.restaurant_hour_today);
         restaurantImage = (ImageView) mActivity.findViewById(R.id.restaurant_picture);
         restaurantStars = (ImageView) mActivity.findViewById(R.id.restaurant_stars);
         populateView(mScreen);
@@ -61,6 +63,7 @@ public class ResultPage implements Page {
         restaurantAddress.setText(screen.address);
         restaurantPhone.setText(screen.phone);
         restaurantNumReviews.setText(screen.numReviews);
+        restaurantHourToday.setText(screen.hourToday);
         restaurantImage.setImageBitmap(screen.image);
         restaurantStars.setImageResource(screen.stars);
     }

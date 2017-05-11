@@ -15,6 +15,7 @@ import com.nwu.yelpapi.pojo.Category;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Calendar;
 
 public class ResultScreen implements Screen {
     //----------------------------------------------------------------------------------------------
@@ -24,6 +25,7 @@ public class ResultScreen implements Screen {
     public final String address;
     public final String phone;
     public final String numReviews;
+    public final String hourToday;
 
     public final int stars;
     public Bitmap image;
@@ -50,6 +52,11 @@ public class ResultScreen implements Screen {
 
         stars = getResourceFromRating(business.rating);
 
+        // TODO: test this hour logic
+        // for now, there's only 1 item in the hours array
+        Business.Hour.Open open = business.hours.get(0).open.get(dayOfWeek());
+        hourToday = open.start + " - " + open.end;
+
         mBusinessImageUrl = business.image_url;
     }
 
@@ -57,6 +64,20 @@ public class ResultScreen implements Screen {
     @Override
     public void showPage(Activity activity) {
         new GetImageTask(activity, this).execute(mBusinessImageUrl);
+    }
+
+    //----------------------------------------------------------------------------------------------
+    private int dayOfWeek() {
+        switch (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
+            case Calendar.MONDAY: return 0;
+            case Calendar.TUESDAY: return 1;
+            case Calendar.WEDNESDAY: return 2;
+            case Calendar.THURSDAY: return 3;
+            case Calendar.FRIDAY: return 4;
+            case Calendar.SATURDAY: return 5;
+            case Calendar.SUNDAY: return 6;
+            default: throw new IllegalArgumentException("Invalid DAY OF WEEK");
+        }
     }
 
     //----------------------------------------------------------------------------------------------
