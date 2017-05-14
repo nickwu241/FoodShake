@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity implements Screen {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Debug.ON) Log.i(TAG, "onCreate");
 
+        // set up app instance and response handler
         mApp = App.instance(getApplicationContext());
         mYelp = mApp.getYelpRequestHandler();
         mYelp.setHandler(new ResponseHandler(this));
@@ -120,14 +120,12 @@ public class MainActivity extends AppCompatActivity implements Screen {
         });
 
         mApp.getNavigator().setUp(this);
-        sendRequest(null);
     }
 
     //----------------------------------------------------------------------------------------------
     @Override
     protected void onResume() {
         super.onResume();
-        if (Debug.ON) Log.i(TAG, "onResume");
         mSensorManager.registerListener(mShakeDetector, mAccelerometer, SensorManager.SENSOR_DELAY_UI);
         mApp.getNavigator().show();
     }
@@ -135,7 +133,6 @@ public class MainActivity extends AppCompatActivity implements Screen {
     //----------------------------------------------------------------------------------------------
     @Override
     protected void onPause() {
-        if (Debug.ON) Log.i(TAG, "onPause");
         super.onPause();
         mSensorManager.unregisterListener(mShakeDetector);
         mVibrator.cancel();
@@ -157,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements Screen {
                     if (Debug.ON) Log.i(TAG, "GRANTED: Location Permissions");
                     return;
                 }
-                
+
                 if (Debug.ON) Log.e(TAG, "DENIED: Location Permissions");
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, Constants.PERMISSION_FINE_LOCATION);
                 break;

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.view.View;
 
 import com.nwu.foodshake.R;
 import com.nwu.foodshake.Util;
@@ -55,10 +54,10 @@ public class ResultScreen implements Screen {
 
         stars = getResourceFromRating(business.rating);
 
-        // TODO: test this hour logic
+        // TODO: test this hour logic, also if times are 0000 don't show it
         // for now, there's only 1 item in the hours array
         Business.Hour.Open open = business.hours.get(0).open.get(dayOfWeek());
-        hourToday = open.start + " - " + open.end;
+        hourToday = convertToAMPM(open.start) + " - " + convertToAMPM(open.end);
 
         url = business.url;
         id = business.id;
@@ -70,6 +69,15 @@ public class ResultScreen implements Screen {
     @Override
     public void showPage(Activity activity) {
         new GetImageTask(activity, this).execute(mBusinessImageUrl);
+    }
+
+    //----------------------------------------------------------------------------------------------
+    private String convertToAMPM(String time24) {
+        int hour24 = Integer.parseInt(time24.substring(0,2));
+        if (hour24 > 12) {
+            return String.valueOf(hour24 - 12) + ':' + time24.substring(2,4) + " PM";
+        }
+        return time24.substring(0,2) + ':' + time24.substring(2,4) + " AM";
     }
 
     //----------------------------------------------------------------------------------------------

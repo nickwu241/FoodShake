@@ -47,8 +47,8 @@
                     app:srcCompat="@drawable/stars_small_0"/>
 
                 <ImageView
-                    android:layout_width="64dp"
-                    android:layout_height="40dp"
+                    android:layout_width="56dp"
+                    android:layout_height="64dp"
                     android:layout_gravity="bottom|right"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/yelp_trademark_rgb_outline"/>
@@ -73,7 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|left"
-                    android:text="hour for today"/>
+                    android:text="##:## AM - ##:## PM"/>
 
             </FrameLayout>
 
